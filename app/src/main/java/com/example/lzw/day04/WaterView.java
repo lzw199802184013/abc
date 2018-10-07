@@ -1,6 +1,7 @@
 package com.example.lzw.day04;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,6 +12,8 @@ import android.view.View;
 
 public class WaterView extends View {
 
+    private  int mPaint2;
+    private  int mPaint;
     private Paint mPaintTop;
     private Paint mPaintBottom;
     private Path mPathTop;
@@ -24,6 +27,10 @@ public class WaterView extends View {
 
     public WaterView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        TypedArray ty = context.obtainStyledAttributes(attrs, R.styleable.WaterView);
+       mPaint=ty.getColor(R.styleable.WaterView_mPaintTop,1000);
+       mPaint2=ty.getColor(R.styleable.WaterView_mPaintBottom,1001);
+       ty.recycle();
         init(context);
     }
 
@@ -34,10 +41,10 @@ public class WaterView extends View {
 
     private void init(Context context) {
          mPaintTop = new Paint();
-         mPaintTop.setColor(Color.WHITE);
+        mPaintTop.setColor(mPaint);
          mPaintTop.setAntiAlias(true);
          mPaintBottom = new Paint();
-         mPaintBottom.setColor(Color.WHITE);
+        mPaintBottom.setColor(mPaint2);
         mPaintBottom.setAntiAlias(true);
         mPaintBottom.setAlpha(60);
         mPathTop = new Path();
